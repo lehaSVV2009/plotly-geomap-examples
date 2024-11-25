@@ -1,8 +1,12 @@
 import plotly.express as px
 import plotly.graph_objects as go
+import base64
+
+map_filename = './football/golden_ball.png'
+montreal_road_map = base64.b64encode(open(map_filename, 'rb').read())
 
 
-def create_geo_map_image(df, title, subtitle, color_prop, title_lat=66, title_lon=10, subtitle_lat=32, subtitle_lon=10):
+def create_geo_map_image(df, color_prop, legends=[]):
     # Create the bubble map with scattermapbox
     fig = px.scatter_mapbox(
         df,
@@ -15,45 +19,38 @@ def create_geo_map_image(df, title, subtitle, color_prop, title_lat=66, title_lo
             "white",
             "white"
         ],
-        zoom=3,  # Adjust initial zoom level
+        opacity=1,
+        zoom=3.3,
     )
 
     # Update traces for marker appearance
     fig.update_traces(
-        textposition='top center',
-        textfont=dict(size=15, color='white'),
-        # marker=dict(line=dict(width=1, color='black')),
+        textposition='middle right',
+        textfont=dict(size=15, color='white', weight="bold"),
+        # marker=go.scattermapbox.Marker(symbol='soccer', color='white', size=20),
     )
 
-    # Add title and subtitle as additional traces
-    if title:
+    # Add legends as additional traces
+    for legend in legends:
         fig.add_trace(go.Scattermapbox(
-            lat=[title_lat],
-            lon=[title_lon],
-            text=title,
+            lat=[legend['lat']],
+            lon=[legend['lon']],
+            text=legend['text'],
             mode='text',
-            showlegend=False,
-            textfont=dict(size=20, color="white"),
+            showlegend=True,
+            textfont=dict(
+                size=legend.get('size', 30),
+                color=legend.get('color', 'white'),
+                weight=legend.get('weight', 'bold')
+            ),
         ))
 
-    if subtitle:
-        fig.add_trace(go.Scattermapbox(
-            lat=[subtitle_lat],
-            lon=[subtitle_lon],
-            text=subtitle,
-            mode='text',
-            showlegend=False,
-            textfont=dict(size=20, color="white"),
-        ))
-
-    # Update map layout to use OpenStreetMap
     fig.update_layout(
         mapbox_style="white-bg",
         mapbox_layers=[
             {
                 "below": 'traces',
                 "sourcetype": "raster",
-                # "sourceattribution": "United States Geological Survey",
                 "source": [
                     "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}"
                 ]

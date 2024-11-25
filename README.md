@@ -23,3 +23,9 @@ python -m pip install -r requirements.txt
 
 ```
 
+4. Run
+
+```
+python golden_ball.py
+python golden_boot.py
+```
