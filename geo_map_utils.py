@@ -1,10 +1,5 @@
 import plotly.express as px
 import plotly.graph_objects as go
-import base64
-
-map_filename = './football/golden_ball.png'
-montreal_road_map = base64.b64encode(open(map_filename, 'rb').read())
-
 
 def create_geo_map_image(df, color_prop, legends=[]):
     # Create the bubble map with scattermapbox
