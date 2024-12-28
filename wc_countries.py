@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-from geo_map_utils import create_geo_map_image
+from geo_map_utils import show_bubble_geo_map
 
 # Load the dataset
 df = pd.read_csv('football/wc_countries.csv')
@@ -39,4 +39,4 @@ df['lon'] = df['Страна'].map(lambda x: country_coords[x]['lon'])
 df['text'] = df.apply(lambda row: "", axis=1)
 
 
-create_geo_map_image(df, 'Год', 'white-bg')
+show_bubble_geo_map(df, 'Год', map_style='USGS')

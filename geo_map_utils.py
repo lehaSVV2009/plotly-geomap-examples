@@ -7,34 +7,34 @@ import plotly.graph_objects as go
 # Load environment variables from .env file
 load_dotenv()
 
-mapbox_accesstoken=os.getenv('MAPBOX_ACCESS_TOKEN')
+mapbox_accesstoken = os.getenv('MAPBOX_ACCESS_TOKEN')
 
-def create_geo_map_image(df, color_prop, map_style='satellite', text_config = { 'size': 15, 'color': 'white', 'weight': 'bold' }, legends=[]):
-    # Create the bubble map with scattermapbox
-    if color_prop:
-        fig = px.scatter_mapbox(
-            df,
-            lat='lat',
-            lon='lon',
-            text='text',
-            size=color_prop,
-            color=color_prop,
-            color_continuous_scale=[
-                "white",
-                "white"
-            ],
-            opacity=1,
-            zoom=3.3,
-        )
+MAP_STYLE_SIMPLE = 'simple'
+MAP_STYLE_USGS = 'USGS'
+MAP_STYLE_SATELLITE = 'satellite'
+
+def show_bubble_geo_map(df, color_prop=None, lat_prop='lat', lon_prop='lon', text_prop='text', map_style='satellite', text_config={'size': 15, 'color': 'white', 'weight': 'bold'}, legends=[]):
+    if map_style == MAP_STYLE_SIMPLE:
+        show_scatter_geo_map(df, color_prop, lat_prop, lon_prop, text_prop, text_config, legends)
     else:
-        fig = px.scatter_mapbox(
-            df,
-            lat='lat',
-            lon='lon',
-            text='text',
-            opacity=1,
-            zoom=3.3,
-        )
+        show_mapbox_bubble_geo_map(df, color_prop, lat_prop, lon_prop, text_prop, map_style, text_config, legends)
+
+def show_mapbox_bubble_geo_map(df, color_prop=None, lat_prop='lat', lon_prop='lon', text_prop='text', map_style='satellite', text_config={'size': 15, 'color': 'white', 'weight': 'bold'}, legends=[]):
+    # Create the bubble map with scattermapbox
+    fig = px.scatter_mapbox(
+        df,
+        lat=lat_prop,
+        lon=lon_prop,
+        text=text_prop,
+        size=color_prop,
+        color=color_prop,
+        color_continuous_scale=[
+            "white",
+            "white"
+        ],
+        opacity=1,
+        zoom=3.3,
+    )
 
     # Update traces for marker appearance
     if not color_prop:
@@ -66,7 +66,7 @@ def create_geo_map_image(df, color_prop, map_style='satellite', text_config = { 
             ),
         ))
 
-    if map_style == 'white-bg':
+    if map_style == 'USGS':
         fig.update_layout(
             mapbox_style="white-bg",
             mapbox_layers=[
@@ -87,10 +87,61 @@ def create_geo_map_image(df, color_prop, map_style='satellite', text_config = { 
         )
     else:
         fig.update_layout(
-            mapbox_style="satellite",
+            mapbox_style=map_style,
             mapbox_accesstoken=mapbox_accesstoken,
             margin={"r": 0, "t": 0, "l": 0, "b": 0},
         )
+
+    # Show the plot
+    fig.show()
+    
+
+
+def show_scatter_geo_map(df, color_prop=None, lat_prop='lat', lon_prop='lon', text_prop='text', text_config={'size': 8, 'color': 'white', 'weight': 'bold'}, legends=[]):
+    fig = px.scatter_geo(df,
+                         lat=lat_prop,
+                         lon=lon_prop,
+                         text=text_prop,
+                         size=color_prop,
+                         color=color_prop,
+                         color_continuous_scale=[
+                             "white",
+                             "white",
+                         ],
+                         opacity=1
+                         )
+
+    # Update layout for better visualization
+    fig.update_traces(textposition='top center',
+                      textfont=dict(size=text_config.get('size'), color=text_config.get('color'), weight=text_config.get('weight')),
+                      marker=dict(line=dict(width=1, color='black')))
+
+    for legend in legends:
+        fig.add_trace(go.Scattergeo(
+            lat=[legend['lat']],
+            lon=[legend['lon']],
+            text=legend['text'],
+            mode='text',
+            textposition='bottom center',
+            showlegend=False,
+            textfont=dict(
+                size=legend.get('size', 30),
+                color=legend.get('color', 'white'),
+                weight=legend.get('weight', 'bold')
+            ),
+        ))
+
+    fig.update_geos(fitbounds="locations")
+    fig.update_layout(
+        geo=dict(
+            coastlinecolor='black',
+            showland=True, landcolor='darkgreen',
+            showocean=True, oceancolor='black',
+            showlakes=True, lakecolor='black',
+            showrivers=True, rivercolor='black',
+            showframe=False,
+        ),
+    )
 
     # Show the plot
     fig.show()

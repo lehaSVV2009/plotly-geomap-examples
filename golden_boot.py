@@ -1,5 +1,5 @@
 import pandas as pd
-from geo_map_utils import create_geo_map_image
+from geo_map_utils import show_bubble_geo_map
 
 # Load the dataset
 df = pd.read_csv('football/golden_boot.csv')
@@ -64,5 +64,5 @@ df['lon'] = df['Страна'].map(lambda x: country_coords[x]['lon'])
 df['text'] = df.apply(
     lambda row: f"{country_flags[row['Страна']]}   {row['Страна']} ({row['Победы']}, {row['Игроки']})", axis=1)
 
-create_geo_map_image(df, 'Победы', map_style='white-bg')
+show_bubble_geo_map(df, 'Победы', map_style='USGS')
 

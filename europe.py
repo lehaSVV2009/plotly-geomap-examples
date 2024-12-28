@@ -1,6 +1,6 @@
 import pandas as pd
 
-from geo_map_utils import create_geo_map_image
+from geo_map_utils import show_bubble_geo_map
 from europe_utils import city_coords, country_flags
 
 # Load the dataset
@@ -15,7 +15,7 @@ df['lon'] = df['Самый населенный город'].map(lambda x: city_
 df['text'] = df.apply(
     lambda row: f"{country_flags[row['Страна']]} {row['Население с агломерацией']}", axis=1)
 
-create_geo_map_image(df, 'Население с агломерацией',
+show_bubble_geo_map(df, 'Население с агломерацией',
 
                      #  'Самый населенный город в стране с агломерацией: Европа',
                      #  "Население города с агломерацией в млн.чел.", 'Население'
