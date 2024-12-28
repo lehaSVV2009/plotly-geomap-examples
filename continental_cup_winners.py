@@ -6,12 +6,12 @@ from geo_map_utils import create_geo_map_image
 
 # Load and merge multiple datasets
 files = [
-    # 'football/continental_cup/continental_cup_winners_africa.csv',
-    # 'football/continental_cup/continental_cup_winners_asia.csv',
+    'football/continental_cup/continental_cup_winners_africa.csv',
+    'football/continental_cup/continental_cup_winners_asia.csv',
     'football/continental_cup/continental_cup_winners_concacaf.csv',
-    # 'football/continental_cup/continental_cup_winners_copa.csv',
-    # 'football/continental_cup/continental_cup_winners_europe.csv',
-    # 'football/continental_cup/continental_cup_winners_oceania.csv',
+    'football/continental_cup/continental_cup_winners_copa.csv',
+    'football/continental_cup/continental_cup_winners_europe.csv',
+    'football/continental_cup/continental_cup_winners_oceania.csv',
 ]
 
 dfs = [pd.read_csv(file) for file in files]
