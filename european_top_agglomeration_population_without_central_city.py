@@ -1,11 +1,12 @@
+
 import pandas as pd
 
 from geo_map_utils import show_bubble_geo_map
 
-COORDINATES_PATH = 'european_cities_with_population_over_1_million/coordinates.csv'
-STATS_PATH = 'european_cities_with_population_over_1_million/stats.csv'
+COORDINATES_PATH = 'european_top_agglomeration_population/coordinates.csv'
+STATS_PATH = 'european_top_agglomeration_population/stats.csv'
 MERGE_COLUMN='City'
-BUBBLE_COLUMN='Population'
+BUBBLE_COLUMN='Population Growth'
 LAT_COLUMN='Lat'
 LON_COLUMN='Lon'
 

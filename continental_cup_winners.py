@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-from geo_map_utils import show_bubble_geo_map
+from geo_map_utils import show_bubble_geo_map, MAP_STYLE_USGS
 
 # Load and merge multiple datasets
 files = [
@@ -81,9 +81,7 @@ country_coords = {
 # Add latitude and longitude for each country
 df['lat'] = df['Страна'].map(lambda x: country_coords[x]['lat'])
 df['lon'] = df['Страна'].map(lambda x: country_coords[x]['lon'])
-df['text'] = df.apply(
-    # lambda row: f"{row['Страна']} {row['Победы']}", axis=1)
-    lambda row: f"", axis=1)
+df['text'] = df.apply(lambda row: f"", axis=1)
 
 
-show_bubble_geo_map(df, 'Победы', map_style='USGS')
+show_bubble_geo_map(df, 'Победы', map_style=MAP_STYLE_USGS)

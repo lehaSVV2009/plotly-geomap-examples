@@ -1,6 +1,4 @@
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
 
 from geo_map_utils import show_bubble_geo_map
 

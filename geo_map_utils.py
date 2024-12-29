@@ -66,7 +66,7 @@ def show_mapbox_bubble_geo_map(df, color_prop=None, lat_prop='lat', lon_prop='lo
             ),
         ))
 
-    if map_style == 'USGS':
+    if map_style == MAP_STYLE_USGS:
         fig.update_layout(
             mapbox_style="white-bg",
             mapbox_layers=[
