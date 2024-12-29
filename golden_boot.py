@@ -2,7 +2,7 @@ import pandas as pd
 from geo_map_utils import show_bubble_geo_map, MAP_STYLE_USGS
 
 # Load the dataset
-df = pd.read_csv('football/golden_boot.csv')
+df = pd.read_csv('football/golden_boot/golden_boot.csv')
 
 # Define the country flags
 country_flags = {

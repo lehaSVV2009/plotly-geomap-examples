@@ -3,7 +3,7 @@ import pandas as pd
 from geo_map_utils import show_bubble_geo_map
 
 # Load the dataset
-df = pd.read_csv('football/wc_countries.csv')
+df = pd.read_csv('football/world_cup/wc_countries.csv')
 
 # Add country flags for each country
 country_flags = { }

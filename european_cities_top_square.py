@@ -2,8 +2,8 @@ import pandas as pd
 
 from geo_map_utils import show_bubble_geo_map
 
-COORDINATES_PATH = 'european_cities_top_square/coordinates.csv'
-STATS_PATH = 'european_cities_top_square/stats.csv'
+COORDINATES_PATH = 'europe/cities_top_square/coordinates.csv'
+STATS_PATH = 'europe/cities_top_square/stats.csv'
 MERGE_COLUMN='City'
 BUBBLE_COLUMN='Square'
 LAT_COLUMN='Lat'

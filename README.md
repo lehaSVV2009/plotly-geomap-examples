@@ -33,3 +33,14 @@ pip install -r requirements.txt
 python golden_ball.py
 python golden_boot.py
 ```
+
+## Examples
+
+### Football
+
+![Golden Ball](football/golden_ball/result.png)
+![Golden Boot](football/golden_boot/result.png)
+
+### European Stats
+
+![European Stats](europe/cities_with_population_over_1_million/result.png)
