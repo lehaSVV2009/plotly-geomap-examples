@@ -41,7 +41,3 @@ python golden_boot.py
 ![Golden Ball](football/golden_ball/result.png)
 ![Golden Boot](football/golden_boot/result.png)
 ![World Cup Holders](football/world_cup_owners/result.png)
-
-### European Stats
-
-![European Stats](europe/cities_with_population_over_1_million/result.png)
