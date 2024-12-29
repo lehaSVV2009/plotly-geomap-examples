@@ -40,6 +40,7 @@ python golden_boot.py
 
 ![Golden Ball](football/golden_ball/result.png)
 ![Golden Boot](football/golden_boot/result.png)
+![World Cup Holders](football/world_cup_owners/result.png)
 
 ### European Stats
 
