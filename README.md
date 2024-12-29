@@ -1,14 +1,18 @@
-# Python maps
+# Python Plotly Geo Map Examples
+
+This repository contains examples of using Plotly to create Bubble Geo Maps.
 
 ### Installation
 
 1. Clone the repository:
 
-TODO
-
-2. Setup pyenv
-
+```bash
+git clone git@github.com:lehaSVV2009/plotly-geomap-examples.git
 ```
+
+1. Setup pyenv
+
+```bash
 brew install pyenv
 eval "$(pyenv init -)"
 pyenv install 3.9.18
@@ -16,16 +20,18 @@ pyenv local 3.9.18
 python --version
 ```
 
-3. Install dependencies
+1. Install dependencies
 
-```
+```bash
 pip install -r requirements.txt
 
 ```
 
-4. Run
+1. Run examples
 
-```
+Bubble maps:
+
+```bash
 python golden_ball.py
 python golden_boot.py
 ```
